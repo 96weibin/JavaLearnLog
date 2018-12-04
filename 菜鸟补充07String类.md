@@ -46,7 +46,7 @@ System.out.printf("浮点型变量的值为 " +
 //这些  + 号  不知道为什么要这么浪   多余的举动
 ```
 
-## String方法 （java中字符串式对象，是否存储在堆空间？）
+## String方法 （java中字符串式对象，是否存储在堆空间？ 是的）
 
 str.fun() 或者 String.fun()
 
@@ -81,14 +81,6 @@ toString() | 返回此对象本身
 toUpperCase() | 转化为大写 | String | str.toUpperCase()
 trim() | 忽略前面和后面的空格 | string | str.trim()
 valueOf(x) | 返回x的字符串形式 | String | String.valueOf(x)
-
-
-
-
-
-
-
-
 
 
 ### copyValueOf
