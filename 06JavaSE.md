@@ -170,7 +170,7 @@ public class Group {
 
 方法 | 说明 | 返回值 | demo
 -|-|-|-
-start() | 返回以前匹配的初始索引 | int | 
+start() | 返回以前匹配的初始索引 | int |
 end() | 返回最后匹配的偏移量
 
 #### 研究方法
@@ -187,7 +187,7 @@ matches() | 将整个取余与模式匹配
 -|-|-|-
 appendReplacement() | 实现非终端添加和替换步骤
 appendTail() | 实现终端添加和替换步骤
-replaceAll() | 
+replaceAll() |
 replaceFirst()|
 quoteReplacement()|
 
@@ -200,18 +200,14 @@ getIndex() | 获取错误的索引 |int
 getPattern() | 获取错误的正则表达式 | String
 getMessage() | 获取错误信息 | String
 
-
-
-
-
 ## 线性表List
 
 ```java
 package list;
 import java.util.ArrayList;
 public class ArrayListDemo {
-	public static void main(String[] args) {
-		ArrayList list = new ArrayList();
+    public static void main(String[] args) {
+        ArrayList list = new ArrayList();
 		list.add("真美好");//曾
 		list.add(0,"世界");//插入
 		System.out.println(list);
@@ -227,8 +223,10 @@ public class ArrayListDemo {
 //[真美好]
 //[]
 ```
+
 方法 | 介绍 | 返回值
 -|-|-
+get(index) | 获取list的第index
 clear() | 清空 | void
 size() | 个数 | int
 toArray() | 转化成Array | object[]
@@ -237,7 +235,6 @@ addAll() | 和 | list
 removeAll() | 差 | list
 retainAll() |  交集 | list
 isEmpty() | 判断是否是空集 | boolean
-
 
 ## 散列表概念
 
@@ -340,6 +337,142 @@ size() | 对象内可以的个数
 
 ## 集合框架（Collection 和 map）
 
+	集合框架包括 集合collection 与 映射Map、以及子类
+
+* list
 
 ## 泛型
 
+* 实现对一个方法 可以对多种数据类型的数组(整数、浮点数、字符串) 进行排序
+
+在java中 若果正常写方法的话，方法要规定返回值类型、  那么  普通的方法不能够被复用，要定义几个   内容基本相同，但是返回值类型不同的方法来执行
+
+* 解决方法   *泛型*
+
+### 泛型方法
+
+* 泛型方法的规则
+
+	* 泛型方法都要有  泛型 *参数声明*  <E>，要放在方法定义返回值类型之前
+	* 每个参数声明部分包含一个或多个参数类型,用逗号分隔，
+	* 类型参数 可以被生命为返回值类型，
+	* 类型参数必须是引用类型的
+
+* demo
+
+	```java
+	package fanxingDemo;
+	//泛型的在方法中的应用,比较容易   在方法  返回值之前 声明一个 类型参数 <E> 
+	//这个类型参数  就是一个  标识  记录  传入数据的类型
+	//在泛型方法内  通过  表示类  E 来声明变量类型， 用于返回计算等
+	public class Fanxing1 {
+		public static <E> void printArray(E[] inputArray){
+			//声明了一个   E类型    泛型方法接受  E[]
+			for(E element : inputArray){		//看着好像for in循环
+				System.out.printf("%s", element);
+			}
+			System.out.println();
+		}
+		public static void main(String[] arguments){
+			Integer[] intArray = {1,2,3,4,5,6};
+			Double[] doubleArray = {1.1,2.2,3.3,4.4,5.5};
+			Character[] charArray = {'h','e','l','l','o'};
+			System.out.println("整形数组");
+			printArray(intArray);
+			System.out.println("double数组");
+			printArray(doubleArray);
+			System.out.println("char数组");
+			printArray(charArray);
+			
+		}
+	}
+	```
+	* 限制范围
+	```java
+	package fanxingDemo;
+
+	public class Fanxing2 {
+		public static <T extends Comparable<T>> T maximum(T x, T y,T z){
+			T max = x;
+			if(y.compareTo(max) > 0) {
+				max  = y;
+			}
+			if(z.compareTo(max) > 0){
+				max = z;
+			}
+			return max;
+		}
+		public static void main(String args[]){
+			System.out.printf( "%d, %d 和 %d 中最大的数为 %d\n\n",
+					3, 4, 5, maximum( 3, 4, 5 ) );
+
+			System.out.printf( "%.1f, %.1f 和 %.1f 中最大的数为 %.1f\n\n",
+					6.6, 8.8, 7.7, maximum( 6.6, 8.8, 7.7 ) );
+
+			System.out.printf( "%s, %s 和 %s 中最大的数为 %s\n","pear",
+					"apple", "orange", maximum( "pear", "apple", "orange" ) );
+		}
+	}
+
+	```
+### 泛型类
+
+* demo
+
+	```java
+		package fanxingDemo;
+
+		public class Fanxing3 <T> { 
+			//通过调用泛型类的时候  可以通过传参来 规定传入参数的类型
+			private T t;
+			public void add(T t){
+				this.t = t;
+			}
+			public T get(){
+				return t;
+			}
+			
+			public static void main(String[] args){
+				Fanxing3<Integer> integerBox = new Fanxing3<Integer>();
+				Fanxing3<String> stringBox = new Fanxing3<String>();
+				
+				integerBox.add(new Integer(10));
+				stringBox.add(new String("菜鸟教程"));
+				
+				System.out.printf("帧数类型 ： %d", integerBox.get());
+				System.out.printf("\n字符串为 ：", stringBox.get());
+				
+			}
+		}
+	```
+
+### 类型通配符
+
+* demo
+
+	```java
+		package fanxingDemo;
+
+		import java.util.ArrayList;
+		import java.util.List;
+
+		public class Fanxing4 {
+			public static void main(String[] arguments){
+				List<String> name = new ArrayList<String>();
+				List<Integer> age = new ArrayList<Integer>();
+				List<Number> number = new ArrayList<Number>();
+				
+				name.add("icon");
+				age.add(18);
+				number.add(123);
+				
+				getData(name);
+				getData(age);
+				getData(number);
+				
+			}
+			public static void getData(List<?> data){
+				System.out.println("data : " + data.get(0));
+			}
+		}
+	```

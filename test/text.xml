@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE 书籍列表[
+    <!ElEMENT 书籍列表 (武侠小说*,computer_book*)>
+    <!ElEMENT 武侠小说 (书名,作者,价格,册数,简介)>
+    <!ElEMENT computer_book (书名,价格,册数,简介,出版日期)>
+    <!ElEMENT 书名 (#PCDATA)>
+    <!ElEMENT 价格 (#PCDATA)>
+    <!ElEMENT 简介 (#PCDATA)>
+    <!ElEMENT 出版日期 (#PCDATA)>
+    <!ElEMENT 册数 (#PCDATA)>
+    <!ElEMENT 作者 (#PCDATA)>
+]>
+
+<书籍列表>
+    <武侠小说>
+        <书名>天龙八部</书名>
+        <作者>金庸</作者>
+        <价格>50</价格>
+        <册数>8</册数>
+        <简介>
+            <![CDATA[一本好书]]>
+        </简介>
+    </武侠小说>
+    <computer_book>
+        <书名>Think in java</书名>
+        <价格>65</价格>
+        <简介>java编程思想</简介>
+        <出版日期>2000.2.1</出版日期>
+    </computer_book>
+</书籍列表>
