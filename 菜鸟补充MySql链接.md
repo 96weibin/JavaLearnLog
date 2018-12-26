@@ -1,6 +1,8 @@
 # 链接Mysql
 
-## eclipse 引入 JDBC jar包（驱动）
+## JDBC
+
+### eclipse 引入 JDBC jar包（驱动）
 
 1. [下载JDBC的jar包](mysql-connector-java-5.1.39-bin.jar);
 2. 使用Eclipse 引入 jar包
@@ -9,7 +11,7 @@
     * 项目右击 -> 构建路径 -> 配置构建路径
     * library -> add Jar -> 选择 lib 下的jar包->应用退出即可
 
-## 链接数据库MySQL
+### 链接数据库MySQL
 
 * 引入Driver(注册驱动)
 
@@ -85,11 +87,11 @@ public class MySQLDemo {
 }
 ```
 
-## 常见错误
+### 常见错误
 
-## 增删改查
+### 增删改查
 
-### insert
+#### insert
 
 ```java
 
@@ -100,7 +102,7 @@ public class MySQLDemo {
     }
 ```
 
-### PreparedStatement
+#### PreparedStatement（SQL语句中添加变量）
 
 ```java
     PreparedStatement preStmt = null;
@@ -109,11 +111,12 @@ public class MySQLDemo {
     preStmt.setString(1, "马化腾");
     preStmt.setInt(2,45);
     int n = preStmt.executeUpdate();
+    //executeQuery用于select  不影响数据源的
     if(n == 1) {
     System.out.println("数据插入成功");
     }
 ```
-### 关联查询(sql)
+#### 关联查询(sql)
 
 ```sql
 SELECT * 
@@ -131,10 +134,8 @@ stmt.close()
 conn.close() //如果
 ```
 
-## 数据库的元数据
 
-
-## JDBC中的事务
+### JDBC中的事务
 
     jdbc中默认的事务是自动提交的
 
@@ -142,4 +143,3 @@ conn.close() //如果
     conn.setAutoCommit(false);//true 自动提交
 ```
 
-## 批处理
