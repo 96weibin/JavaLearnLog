@@ -226,7 +226,7 @@ public class ArrayListDemo {
 
 方法 | 介绍 | 返回值
 -|-|-
-get(index) | 获取list的第index
+get(index) | 获取list的第index   从0开始
 clear() | 清空 | void
 size() | 个数 | int
 toArray() | 转化成Array | object[]
@@ -355,7 +355,7 @@ size() | 对象内可以的个数
 
 	* 泛型方法都要有  泛型 *参数声明*  <E>，要放在方法定义返回值类型之前
 	* 每个参数声明部分包含一个或多个参数类型,用逗号分隔，
-	* 类型参数 可以被生命为返回值类型，
+	* 类型参数 可以被声明为返回值类型，
 	* 类型参数必须是引用类型的
 
 * demo

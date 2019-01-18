@@ -37,7 +37,7 @@ response.setContentType()设置返回值得类型
 //看到  servlet  第二章   链接 MySQL
 
 
-## 重定向&&
+## 重定向
 
 * 重定向 ： 服务器向浏览器  发送302(暂时重定向)状态码以及 location 浏览器接收到后会立即请求location
 
@@ -49,6 +49,42 @@ response.setContentType()设置返回值得类型
 * 重定向方法： 
 
     response.sendRedirect(String url); //url是重定向的地址
+
+## 转发（jsp页面显示数据好像要用到的就是转发）
+
+	一个web组件(servlet/jsp) 将未完成的处理交给另一个web组件处理,转发的各个组件共享 request 和response
+
+* 如何转发
+
+	1. 绑定数据
+
+		```java
+			request.setAttribute(String name,Object obj);
+			
+			//与绑定相关的另外两个方法
+			Object request.getAttribute(String name);
+			request.removeAttribute(String name);
+			//如果name对应的值是不存在  返回null
+		```
+	2. 获得转发器
+
+		```java
+		RequestDispatcher rd = request.getRequestDispatcher(String uri);
+										//获得 请求 分配器
+		rd.forward(request,response);
+		```
+	3. 注意
+
+		转发前不要out.close或者out.flush
+		如果 response 中有数据会被清空
+	
+	4. 特点
+		只能转发给同项目下的 web组件
+		转发后浏览器地址栏 不变
+		转发涉及的web组件  共享一个 request response
+
+
+
 
 ## Dao （Data Access Object）
 
@@ -534,28 +570,225 @@ public class ModifyEmpServlet extends HttpServlet {
 }
 ```
 
+### dao的流程理解图
+
+
+
 
 ## dao工厂模式
 
+	好尴尬,  打了一遍pdf上的 工厂模式    基本没有变化  就是把   获取 dao    new 实例的步骤放在  factory  然后每次调用factory  实现
+
+```java
+package util;
+
+import dao.impl.*;
+
+public class DAOFactory {
+	public static Object getInstance (String type){
+		Object obj = null;
+		if(type.equals("EmployeeDAO")){
+			obj = new EmployeeDAOHibernateImpl();
+		}
+		return obj;
+	}
+}
+
+//在要使用 dao的地方  通过  调用函数执行  来获取 dao实例
+//这是  如果更换 jdbcImpl 为 hibernateImpl 则只需要更改 这里的就好，
+//不需要 挨个servlet 来更改。
+EmployeeDAO dao = (EmployeeDAO) DAOFactory.getInstance("EmployeeDAO");
+```
+
+
+### 改进的工厂模式（没看懂）
+
+* daoconfig.properties (配置文件)
+
+```properties
+EmployeeDAO = dao.impl.EmployeeDAOJdbcImpl
+## EmployeeDAO = dao.impl.EmployeeDAOHibernateImpl
+ABC = aaa
+```
+
+* configUtil.java (读取配置文件)
+
+```java
+package util;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class ConfigUtil {
+
+	private static Properties props = new Properties();
+	static{
+		ClassLoader loader = ConfigUtil.class.getClassLoader();
+		InputStream ips = loader.getResourceAsStream("util/daoconfig.properties");
+		try{
+			props.load(ips);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+				
+	}
+	public static String getValue(String key){
+		return props.getProperty(key);
+	}
+	public static void main(String[] args){
+		System.out.println(getValue("ABC"));
+	}
+}
+```
+
+* DAOFactory.java
+
+```java
+package util;
+
+public class DAOFactory {
+	public static Object getInstance (String type){
+		Object obj = null;
+		//依据接口找对应的类名
+		String className = ConfigUtil.getValue(type);
+		//使用反射创建实例
+		try{
+			obj = Class.forName(className).newInstance();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+//		if(type.equals("EmployeeDAO")){
+//			obj = new EmployeeDAOHibernateImpl();
+//		}
+		return obj;
+	}
+}
+```
 
 
 
+## 类加载器
 
 
+```java
+Student s = new Student();
+s.play();
+Student s2 = new Student();
+```
+
+* 内存空间
+
+	jvm在操作系统中就是一个线程，系统会给其分配一块内存空间。
+	这块内存分为三个区域  1、栈区 2、堆区 3、方法区
+
+1. 程序执行 到第一行 Student
+
+	此时jvm 查看  方法区  中是否有 Student对应的类,没有  调用 类加载器
+	类加载器 通过 classPath 找到 Student物理位置的字节码文件
+	类加载器 将 class文件变成 对象放入方法区。
+
+2. 执行到 第一行 s
+
+	将 s 放入栈空间
+
+3. 执行 第一行 new Student();
+
+	在堆空间创建对象 ， s 指向这个对象。   对象存储着  对象的属性
+	对象的方法放在  方法区 
+
+4. 执行 s.play();
+
+	到方法区找到play方法执行
+
+	![](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-28/90000630.jpg)
 
 
+5. 执行第三行 Student 
+
+	已经存在 Student类。所以不调用类加载器。
+
+6. 第三行  s2 
+
+	将s2存入到栈区
+
+6. new Student();
+
+	在堆空间创建对象、对象存储着属性，方法任然是  方法区的 同一个方法。
+
+	![](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-28/8900073.jpg)
+
+## 处理请求资源路径
+
+	http://ip:port/appName/abc.html;
+
+	webObject 对应的就是   appName 下面的 abc.html由  web.xml配置。
+
+### xml配置可以请求的路径
+
+rul-pattern | 匹配请求
+-|-
+/abc | 匹配精确的abc
+/abc.html | 可以骗人，其实我请求的是一个servlet，<br>访问的url却是abc.html
+/abc/* | 匹配 /abc/任何字符串(可以有空格)
+*.do | 匹配任何以 .do 为后缀的
+
+## Servlet处理多种请求
 
 
+### 一个servlet接收多个请求
+
+	通过拆分请求url 执行不同的逻辑
+```java
+String uri = request.getRequestURI();
+String path = uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
+if(path.equals("list")){
+	//dosomething
+}else if(path.equals("add")){
+	//dosomething
+}
+```
+
+	请求不同的url 要设置  web.xml中   urlPattern  为 *.do
+
+* 以我一个前端开发的经验，我写过的多个务求请求一个页面都是传不同的状态值，后台判断状态值，执行不同的逻辑
 
 
+## servlet生命周期与核心接口与类
+
+### 核心接口与类
+
+1. Servlet 接口
+
+	init(ServletConfig config)
+	destory()
+	service(ServletRequest res,ServletResponse rep)
+
+2. GenericServlet抽象类
+
+	实现了 Servlet接口中的  inti 和 destroy方法
+
+3.  HttpServlet抽象类
+
+	继承了GennericServlet实现了 service方法
+
+4. ServletRequest 与 ServletResponse接口
+
+5. HttpServletRequest 与 HttpServletRequest 接口
+
+6. ServletConfig接口
+
+	String getInitParameter(String paraName);
 
 
+### servlet生命周期
 
 
+	servlet 04   待补充
 
 
-
-
+## 过滤器
 
 
 
