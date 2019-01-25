@@ -176,7 +176,7 @@ for(初始化; 判断; 执行){
     //循环体
 }
 ```
-### do-whild
+### do-while
 
 ```java
 do {

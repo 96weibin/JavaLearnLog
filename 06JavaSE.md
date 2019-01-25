@@ -235,6 +235,7 @@ addAll() | 和 | list
 removeAll() | 差 | list
 retainAll() |  交集 | list
 isEmpty() | 判断是否是空集 | boolean
+count(str) | 返回 括号内元素在 列中出现的次数
 
 ## 散列表概念
 

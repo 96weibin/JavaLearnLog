@@ -44,6 +44,13 @@
 
 ### el表达式
 
+要使用el表达式中的**标签**要在开头引入  文件
+
+```jsp
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+```
+
+
 * jstl  
 
     java standard taglib  （java 标准 标签库）
@@ -62,6 +69,9 @@
 
         jsp引擎会从 pageContext -> request -> session -> application
         依次查找  名为  oUser的对象，找到后调用对象的 getName方法，并输出值(找不到输出空)
+
+        * ∴ 相当于  out.print(oUser.getName());
+
     * ${user[propname]}
 
         propname是变量名
@@ -84,7 +94,95 @@
 
 #### el表达式核心标签
 
-1. 
+1. <c:if test="" var="" scope=""></c:if>
+
+```jsp
+<c:if test="flag">
+    <!-- if flag equal true do something -->
+</c:if>
+```
+
+    如果test为true 则 执行
+
+属性 | 用法
+-|-
+test | val为 boolean true则执行标签体内容false则不执行
+var  | 指定一个绑定名
+scope| 指定绑定范围 (pageContext，request，session，application)
+
+2. <c:choose>   <c:when test="">    <c:otherwise>
+
+    很像if else
+```jsp
+<c:choose>
+    <c:when test="${user.gendar == 'm'}">男</c:when>
+    <c:otherwise>女</c:otherwise>
+</c:choose>
+```
+
+3. <c:forEach var="" items"" varStatus="">
+
+    很像 foreach
+
+```jsp
+<c:forEach var="user" items="${users}">
+    <tr>
+        <td>${user.name}</td>
+        <td>${user.gendar}</td>
+    </tr>
+</c:forEach>
+```
+
+4. <c:rul>
+
+当用户进制cookie后再地址后添加sessionId
+
+```jsp
+<a href="<c:url value='/jst.jsp/'>">访问jst.jsp</a>
+```
+
+5. <c:set var="" scope="" value="">
+
+    绑定一个对象到指定的范围
+```jsp
+<c:set var="rs" scope="session" value="2">
+<p>
+    ${sessionScopt.rs} 
+    <!-- 2 -->
+</p>
+<c:remove var="rs" scope="session">
+<p>
+    ${sessionScopt.rs} 
+    <!--  -->
+</p>
+```
+
+6. <c:catch var="">
+
+```jsp
+<c:catch var="msg">
+    <%
+        Integer.parseInt("123a");
+    %>
+</c:catch>
+${msg}  
+<!-- 输出报错 -->
+```
+
+7. <c:import url> 
+
+    引入文件
+8. <c:redirect url="">
+
+    重定向
+
+9. <c:out value="" default="" escapeXml="">
+
+escapeXml="" 默认值为true 将value 中的特殊字符用实体字符替换
 
 
+```jsp
+    <c:out value="${str}" default="hello">
 
+    <!-- 用于输出 el表达式的时候可以设置 默认值 -->
+```

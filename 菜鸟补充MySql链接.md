@@ -142,3 +142,27 @@ conn.close() //如果
     conn.setAutoCommit(false);//true 自动提交
 ```
 
+## 键表种类
+
+名称 | 作用
+-|-
+主键 | 标记唯一的数据库中的一个字段
+外键 | 在表内引入另一张表的主键,在这张表中就叫外键
+主表 | 主键所在的表
+从表 | 外键所在的表
+关联表 | 关联查询
+
+主表从表是相对的
+
+
+## sql 语句创建表
+
+```sql
+CREATE TABLE t_user (
+ t_id int(11) NOT NULL AUTO_INCREMENT,
+ t_login_name varchar(50) DEFAULT NULL,
+ t_password varchar(50) DEFAULT NULL,
+ t_name varchar(100) DEFAULT NULL,
+ PRIMARY KEY (t_id)
+) ENGINE=InnoDB;    -- InnoDB是 mysql的一种引擎
+```
