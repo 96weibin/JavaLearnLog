@@ -560,7 +560,8 @@ public class ModifyEmpServlet extends HttpServlet {
 			e.setId(id);
 			e.setAge(age);
 			e.setName(name);
-			e.setSalary(salary);dao.update(e);
+			e.setSalary(salary);
+			dao.update(e);
 			response.sendRedirect("ListEmpServlet");
 		}catch(Exception e){
 			e.printStackTrace();

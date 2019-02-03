@@ -120,7 +120,17 @@ public class User {
 </hibernate-mapping>
 ```
 
-#### hibernate.cfg.xml
+##### 主键的生成方式
+
+type | 方式
+-|-
+identity | 自动生成主键(Oracle不支持)
+sequence | Oracle 用序列生成id主键
+native | 根据配置文件中方言使用identity还是sequence
+increment | 不常用 (增量、增加)
+assigned | 不常用，手动生成id
+
+#### hibernate.cfg.xml  配置文件
 
 hibernate 的配置文件,同样也要放在 src目录下面
 
@@ -231,6 +241,7 @@ public class HelloHibernate {
 		Session session = HibernateUtil.openSession();
 		Query query = session.createQuery("from User");
 		List<User>userList = query.list();
+
 		for(User user : userList){
 			System.out.println(user.getId()+"|"+user.getName()+"|"+user.getPassword());
 		}
@@ -240,6 +251,15 @@ public class HelloHibernate {
 ```
 
 
+### many-to-one  表关联
+
+在 主表中  引入  附表类，  同时也在  附表中引入主表的类
+且 get set
+
+
+附表   对应的 在映射文件中配置  
+
+<many-to-one name="main" class="main" column="main_fk">
 
 
 
