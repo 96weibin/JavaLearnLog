@@ -12,8 +12,9 @@
   2. 配置文件 hibernate.cfg.xml
   3. hibernate映射文件
   4. hibernate方法
-    1. 获取session对象
-    2. 创建transaction对象
+
+		* 获取session对象
+		* 创建transaction对象
         session对象操作数据
 
   POJO: Plain Old Java Object  简单的java对象
@@ -36,7 +37,6 @@ src/
 hibernate.cfg.xml         //hibernate配置文件
 ```
 
-
 ### 代码实现
 
 #### User.java
@@ -47,48 +47,48 @@ hibernate.cfg.xml         //hibernate配置文件
 package com.wb.po;
 
 public class User {
-	private Integer id;
-	private String loginName;
-	private String password;
-	private String name;
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public String getLoginName() {
-		return loginName;
-	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public User() {
-		super();
-	}
-	public User(Integer id, String loginName, String password, String name) {
-		super();
-		this.id = id;
-		this.loginName = loginName;
-		this.password = password;
-		this.name = name;
-	}
+private Integer id;
+private String loginName;
+private String password;
+private String name;
+
+public Integer getId() {
+	return id;
+}
+public void setId(Integer id) {
+	this.id = id;
+}
+
+public String getLoginName() {
+	return loginName;
+}
+public void setLoginName(String loginName) {
+	this.loginName = loginName;
+}
+
+public String getPassword() {
+	return password;
+}
+public void setPassword(String password) {
+	this.password = password;
+}
+
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public User() {
+	super();
+}
+public User(Integer id, String loginName, String password, String name) {
+	super();
+	this.id = id;
+	this.loginName = loginName;
+	this.password = password;
+	this.name = name;
+}
 }
 ```
 
@@ -260,14 +260,4 @@ public class HelloHibernate {
 附表   对应的 在映射文件中配置  
 
 <many-to-one name="main" class="main" column="main_fk">
-
-
-
-
-
-
-
-
-	
-
 

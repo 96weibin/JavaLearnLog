@@ -22,7 +22,7 @@ spring 通过配置文件，实现factory解耦的功能，
 
 ```java
 public interface HelloBean {
-	public abstract void sayHello();
+  public abstract void sayHello();
 }
 
 ```
@@ -33,11 +33,11 @@ public interface HelloBean {
 
 ```java
 public class EnHelloBean implements HelloBean {
-	@Override
-	public void sayHello() {
-		System.out.println("hello the world!");
-	}
-	
+  @Override
+  public void sayHello() {
+    System.out.println("hello the world!");
+  }
+  
 }
 ```
 
@@ -47,10 +47,10 @@ public class EnHelloBean implements HelloBean {
 
 ```java
 public class ZhHelloBean implements HelloBean {
-	@Override
-	public void sayHello() {
-		System.out.println("世界你好");
-	}
+  @Override
+  public void sayHello() {
+    System.out.println("世界你好");
+  }
 }
 ```
 
@@ -61,19 +61,19 @@ public class ZhHelloBean implements HelloBean {
 
 ```java
 public class UseBean {
-	private HelloBean hello;
-	//声明了  HelloBean这个 类型的  hello
-	public void setHello(HelloBean hello){
-		//根据配置文件 UseBean 设置的  property name 是hello
-		//所以在执行到这个 UseBean类的时候  会执行  setHello 方法
-		//从而 通过配置文件控制了   业务
-		this.hello = hello;
-	}
-	public void show(){
-		System.out.println("显示hello消息");
-		hello.sayHello();
-	}
-	
+  private HelloBean hello;
+  //声明了  HelloBean这个 类型的  hello
+  public void setHello(HelloBean hello){
+    //根据配置文件 UseBean 设置的  property name 是hello
+    //所以在执行到这个 UseBean类的时候  会执行  setHello 方法
+    //从而 通过配置文件控制了   业务
+    this.hello = hello;
+  }
+  public void show(){
+    System.out.println("显示hello消息");
+    hello.sayHello();
+  }
+  
 }
 ```
 
@@ -96,16 +96,16 @@ http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
  <!--创建Bean，有指定的id，对应的class-->
 
 <bean id="usebean" class="com.wb.beans.UseBean">
-	<property name="hello" ref="zhhellobean"></property>
+  <property name="hello" ref="zhhellobean"></property>
     <!-- 当执行UseBean时,setHello  为 zhhellobean 即找到了  对应的类 -->
 </bean>
 
 
 <!-- 
-	也可以用 name来定义名字，
-	name与id的作用相同， 只是 name 允许存在 特殊字符
-	<bean name="/login" class="com.wb.service.Login"></bean> 
-	
+  也可以用 name来定义名字，
+  name与id的作用相同， 只是 name 允许存在 特殊字符
+  <bean name="/login" class="com.wb.service.Login"></bean> 
+  
 -->
 
 
@@ -124,13 +124,13 @@ http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 ```java
 public class Test {
     public static void main(String[] args){
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-		//获取配置文件
+    ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+    //获取配置文件
         UserBean bean = (UserBean)ac.getBean("usebean");
         //根据配置文件获取bean
-				bean.show();
+        bean.show();
         //执行bean的方法
-	}
+  }
 }
 ```
 
@@ -194,38 +194,38 @@ public static void main(String[] arguments){
 
 ```java
 public class Test {	
-	public static final String[] CONFIGS = {"applicationContext.xml"};
-	public static void main(String[] args){
-		ApplicationContext ac = new ClassPathXmlApplicationContext(CONFIGS);
-		MyBean bean1 = (MyBean)ac.getBean("mybean");
-		MyBean bean2 = (MyBean)ac.getBean("mybean");
-		System.out.println(bean1);
-		System.out.println(bean1 == bean2); //true
+  public static final String[] CONFIGS = {"applicationContext.xml"};
+  public static void main(String[] args){
+    ApplicationContext ac = new ClassPathXmlApplicationContext(CONFIGS);
+    MyBean bean1 = (MyBean)ac.getBean("mybean");
+    MyBean bean2 = (MyBean)ac.getBean("mybean");
+    System.out.println(bean1);
+    System.out.println(bean1 == bean2); //true
         //通过结果发现 多次 getBean  生成的还是同一个
-	}
+  }
 }
 ```
 * 解决方法
-	 在 xml中需要多次getBean的标签添加属性	scope="prototype"
+   在 xml中需要多次getBean的标签添加属性	scope="prototype"
 
 * scope属性  
-	
-	在web项目设置创建的bean对象的生命周期和rquest、session
+  
+  在web项目设置创建的bean对象的生命周期和rquest、session
 
-	取值 | 作用
-	-|-
-	request | bean的生命周期和request的生命周期相同
-	session | 和session的声明周期相同
-	global session  | 生命周期与应用相同
-	singleton | 单例
-	prototype | 原型
+  取值 | 作用
+  -|-
+  request | bean的生命周期和request的生命周期相同
+  session | 和session的声明周期相同
+  global session  | 生命周期与应用相同
+  singleton | 单例
+  prototype | 原型
 
 #### bean对象的初始化和销毁
 
-	ac.getBean() 即为初始化，ac.close()即为 销毁
+  ac.getBean() 即为初始化，ac.close()即为 销毁
 
-	init-Method 		用于指定初始化方法
-	destroy-method 	用于指定销毁方法 (仅适用于 singleton模式)
+  init-Method 		用于指定初始化方法
+  destroy-method 	用于指定销毁方法 (仅适用于 singleton模式)
 
 
 #### DI依赖注入（建立关系）
@@ -235,8 +235,8 @@ Spring容器通过依赖注入DI   建立起对象、组件、bean之间的关�
 
 * 两种方式
 
-	1. setter方式注入
-	2. 构造方式注入
+  1. setter方式注入
+  2. 构造方式注入
 
 
 
@@ -246,63 +246,62 @@ Spring容器通过依赖注入DI   建立起对象、组件、bean之间的关�
 ```xml
 <context:component-scan base-package="com.wb.demo1"></context:component-scan>
 ```
-  
 
 2. 注解分类 
 
-	1. 扫描Bean组件的注解
+  1. 扫描Bean组件的注解
 
-		注解 | 含义
-		-|-
-		@Service | Service业务组件
-		@Controler | Action控制组件
-		@Respository | DAO数据访问组件
-		@Component | 其他组件
+    注解 | 含义
+    -|-
+    @Service | Service业务组件
+    @Controler | Action控制组件
+    @Respository | DAO数据访问组件
+    @Component | 其他组件
 
-	@Service 默认生成的 bean 的id 是  类名首字母小写
-	也可以  
-	@Service('otherName')  更改生成bean的名字
+  @Service 默认生成的 bean 的id 是  类名首字母小写
+  也可以  
+  @Service('otherName')  更改生成bean的名字
 
-	添加@Service就相当于添加  xml <id="" class="">  从而可以被 ac getBean
+  添加@Service就相当于添加  xml <id="" class="">  从而可以被 ac getBean
 
-	添加 
+  添加 
 
 
-	2. 依赖注入的注解
+  2. 依赖注入的注解
 
-		注解 | 含义
-		-|-
-		@Resource |  JDK提供 按名称 @Resource(name="id名") 自动装配 
-		@AutoWired | Spring提供 按名称自动装配	set
-		@Autowired | 
-		@Qualifier | @Qualifer("id名")
-		自动装配 | 在配置xml中 声明bean？
-		
+    注解 | 含义
+    -|-
+    @Resource |  JDK提供 按名称 @Resource(name="id名") 自动装配 
+    @AutoWired | Spring提供 按名称自动装配	set
+    @Autowired | 
+    @Qualifier | @Qualifer("id名")
+    自动装配 | 在配置xml中 声明bean？
+    
 
-		@Resource 如果仅有额外的一个 bean可用的时候不需要写name
-		有多个的时候    @Resource(name="id");  确定 依赖注入的是哪个 bean
-		知道是哪个bean后  注解 还会自动 set且执行 set  
-		这样声明的一个 接口就直接实现成某个 实现类
+    @Resource 如果仅有额外的一个 bean可用的时候不需要写name
+    有多个的时候    @Resource(name="id");  确定 依赖注入的是哪个 bean
+    知道是哪个bean后  注解 还会自动 set且执行 set  
+    这样声明的一个 接口就直接实现成某个 实现类
 
-		@AutoWired 用于只有一个额外的 bean 的时候 如果有多个需要
-		@Qualifier 来声明是哪个 
-	
+    @AutoWired 用于只有一个额外的 bean 的时候 如果有多个需要
+    @Qualifier 来声明是哪个 
+  
 
-	```java
-	@AutoWired
-	@Qualifier("beanName")
-	private HelloBean hello;
-	```
+  ```java
+  @AutoWired
+  @Qualifier("beanName")
+  private HelloBean hello;
+  ```
 
-	3. 其他注解
-		
-		设置bean的一些属性
+  3. 其他注解
+    
+    设置bean的一些属性
 
-		注解 | 含义
-		-|-
-		@Scope | 等价于 <bean Scope="">
-		@PostConstruct | 等价于<bean init-method="">
-		@PreDestory | 等价于 <bean destory-method="">
+    注解 | 含义
+    -|-
+    @Scope | 等价于 <bean Scope="">
+    @PostConstruct | 等价于<bean init-method="">
+    @PreDestory | 等价于 <bean destory-method="">
 
 
 ## AOP （Aspect Oriented Programming）
@@ -324,30 +323,26 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-2.5.xsd
 http://www.springframework.org/schema/aop 
 http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
- 
-<!-- 在配置文件  beans中  多了个  
- xmlns:aop="http://www.springframework.org/schema/aop" 属性 -->
+
+<!-- 在配置文件  beans中  多了个 xmlns:aop="http://www.springframework.org/schema/aop" 属性 -->
 
 <bean id="optlogger" class="com.wb.aop.Optlogger"></bean>
 
 <aop:config>
-	
-		<aop:pointcut expression="execution(* com.service.*.*(..)*)" id="servicepointcup"/>
-		<!-- 设置切入点  experession  切入点表达式 -->	
+  
+    <aop:pointcut expression="execution(* com.service.*.*(..)*)" id="servicepointcup"/>
+    <!-- 设置切入点  experession  切入点表达式 -->	
 
-	<aop:aspect id="loggeraspect" ref="optlogger">
-	<!-- 配置切面bean -->
+  <aop:aspect id="loggeraspect" ref="optlogger">
+  <!-- 配置切面bean -->
 
-		<aop:before method="logger" pointcut-ref="servicepointcup"/>
-		<!-- 采用before通知的方式 -->
+    <aop:before method="logger" pointcut-ref="servicepointcup"/>
+    <!-- 采用before通知的方式 -->
 
-	</aop:aspect>
+  </aop:aspect>
 </aop:config>
- 
-</beans>
+ </beans>
 ```
-
-
 
 #### 通知方式
 
@@ -357,7 +352,6 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
  <aop:after > | 在目标方法调用之后执行，  正常、异常都执行
  <aop:after-throwing> | 异常通知
  <aop:around> | 环绕通知
-
 
 ### aop注解配置
 
@@ -378,16 +372,8 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
 //TODO		待补充
 
-
-
-
 ## Spring对数据库访问技术的支持
 
 ### Spring JDBC
 
-
-
-
 ### Spring Hibernate
-
-

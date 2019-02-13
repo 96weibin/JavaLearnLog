@@ -1,10 +1,12 @@
+# java 方法、运算符、控制语句
+
 ## java 的方法
 
 ### 方法的声明
 
 ```java
 public static int f (int x) { //第一个int 是规定返回值得类型，第二个int 是 声明x 的类型
-    int y = 3 * x +6; //运算
+    int y = 3 * x + 6; //运算
     return y; //返回值
 }
 ```
@@ -20,21 +22,22 @@ public static void main (String[] args) {
 ```
 
 ### 调用方法的实例
+
 ```java
 package demoPackage;
 import java.util.Scanner;
 public class useMethod {
-	public static void main(String[] args) {
-		Scanner console = new Scanner(System.in);
-		System.out.print("请输入x");
-		int x = console.nextInt();
-		int y = f(x); //调用 f 传参 x
-		System.out.println("f(x)=3 X "+ x +" + 6="+y);
-	}
-	public static int f(int x1) {   //定义的方法f
-		int y = 3 * x1 + 6;
-		return y;
-	}
+    public static void main(String[] args) {
+        Scanner console = new Scanner(System.in);
+        System.out.print("请输入x");
+        int x = console.nextInt();
+        int y = f(x); //调用 f 传参 x
+        System.out.println("f(x)=3 X "+ x +" + 6="+y);
+    }
+    public static int f(int x1) {   //定义的方法f
+        int y = 3 * x1 + 6;
+        return y;
+    }
 }
 ```
 
@@ -56,36 +59,39 @@ public class useMethod {
 
 ### 形参和实参
 
-    与js 相同   形参 是函数定义时候的参数
+    与js 相同    形参 是函数定义时候的参数
                 实参 是函数调用时候传入的参数
+
 ## java运算符
 
 ### 乘性操作符
 
 * 运算的封闭性
-    * 同类型的参与运算(可能需要自动类型转换)
-    * 返回同种类型(可能发生溢出)
-    * byte, short, char 三种类型在java 中
+  * 同类型的参与运算(可能需要自动类型转换)
+  * 返回同种类型(可能发生溢出)
+  * byte, short, char 三种类型在java 中 会被转化成int来计算。
 
     ```java
     int a = 10 + 'a';
     System.out.println(a);  // 107
-    System.out.println((char)a) //k 
+    System.out.println((char)a) //k
     ```
-    
-    * 整数的除法是整除(下溢出 所以余数被舍掉)
-    * byte、short都要以**int** 类型运算
+
+  * 整数的除法是整除(下溢出 所以余数被舍掉)
+  * byte、short都要以**int** 类型运算
+
     ```java
         byte b = 4;
-		byte d = b+b; //报错、这里d的声明应该变成 int
+        byte d = b+b; //报错、这里d的声明应该变成 int
         byte d = (byte)(b+b); //或者 强制类型转换
-		System.out.println(d);
+        System.out.println(d);
     ```
+
     * % 取余 与js 相同返回  余数
 
 ### 自增自减运算符
 
-    --、++、与js相同
+    --、++                  与js相同
 
 ### 逻辑运算符
 
@@ -103,7 +109,6 @@ public class useMethod {
 != | 不等
 
 *注意*：与js不同java 是强类型的语言，所以没有 === 判断
-
 
 ### 三目运算符
 
@@ -150,13 +155,14 @@ switch () {
 ```
 
 * demo
+
 ```java
 Scanner console = new Scanner(System.in);
 int qty;
 while(true) {
     System.out.print("请输入数量");
     qty = console.nextInt();
-    //虽然这是在while里面 但是 这个 console.nextInt() 会阻止程序的执行，要等到 控制台输入值得时候继续执行
+    //虽然这是在while里面 但是 这个 console.nextInt() 会阻止程序的执行，要等到 控制台输入值  的时候继续执行
     if (qty > 0 && qty <=5) {
         break;
     }
@@ -166,8 +172,7 @@ System.out.println("数量" + qty);
 
 ```
 
-![](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-11-23/51077080.jpg)
-
+![结果显示](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-11-23/51077080.jpg)
 
 ### for
 
@@ -176,6 +181,22 @@ for(初始化; 判断; 执行){
     //循环体
 }
 ```
+
+### for 增强
+
+```java
+for(声明:数组){
+    //do something
+}
+```
+
+```java
+int [] number = {1,2,3,4,5,6,78};
+for (int x : number){
+    System.out.println(x + ",");
+}
+```
+
 ### do-while
 
 ```java

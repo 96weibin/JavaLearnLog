@@ -42,9 +42,9 @@ response.setContentType()设置返回值得类型
 * 重定向 ： 服务器向浏览器  发送302(暂时重定向)状态码以及 location 浏览器接收到后会立即请求location
 
 * 重定向注意点：
-    
-    * 重定向之前不能  out.close() 或 out.flush()
-    * 如果response对象有数据会被清空
+
+	* 重定向之前不能  out.close() 或 out.flush()
+  * 如果response对象有数据会被清空
 
 * 重定向方法： 
 

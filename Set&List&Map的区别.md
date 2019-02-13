@@ -9,12 +9,12 @@
 ## Array
 
 * Arrays类提供操作array的方法
-    
-    * equals()  比较数组相等
-    * fill()    将值填入array中
-    * sort()    排序
-    * binarySearch()    在排好序的array中虚招元素
-    * System.arraycopy()    复制array
+
+  * equals()  比较数组相等
+  * fill()    将值填入array中
+  * sort()    排序
+  * binarySearch()    在排好序的array中虚招元素
+  * System.arraycopy()    复制array
 
 ## Collection接口
 
@@ -38,6 +38,7 @@ toArray() | 返回一个数组
 ```java
 Set s = new HashSet();
 ```
+
 set集合继承了collection的方法、没有额外的方法、set内的元素不会重复、类似于json中的属性名
 
 ## List
@@ -46,6 +47,7 @@ set集合继承了collection的方法、没有额外的方法、set内的元素�
 List arrList = new ArrayList();
 arrList.add()
 ```
+
 同样继承自collection 、有顺序的可以存储多种可重复的集合
 
 方法 | 介绍 | 返回值
@@ -76,18 +78,9 @@ put(key,value) | 添加key，value
 remove(key) | 删除某个key
 size() | 对象内可以的个数
 
-
-
 对象 | 特点 | demo
 -|-|-
 Array   | 有序、速度最快、length返回的是容量而非长度、类型单一、长度不可变 | [a,b,c,a,b,c]
 set     | 有序、value不重复、可变长 | [a,b,c]
 List    | 有序、value可重复、可变长 | [1,{},2,[],3]
 Map     | 无序、key不重复           | [key1:value,key2:value]
-
-
-
-
-
-
-
