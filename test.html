@@ -7,16 +7,28 @@
   <title>Document</title>
 </head>
 <body>
+
+  <form action="http://www.baidu.com" onsubmit="return check()">
+  <input type="text" class="text"> 
+  <input type="submit">
+  </form>
+  <script src="./jquery.js"></script>
   <script>
-  
-    function a(a){
-      console.log(a);
-    }
-    function a(a,b){
-      console.log("计算" + a + b);
+    function check(){
+      
+      if(!$(".text").val()){
+        return false;
+      } else{
+        return true;
+      }
     }
 
-    a(1);
+    var demo = ()=>{
+      var str = `<h1>hahah</h1>`;
+      
+    }
+
+
   </script>
 </body>
 </html>

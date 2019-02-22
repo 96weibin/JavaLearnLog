@@ -13,7 +13,7 @@
   * equals()  比较数组相等
   * fill()    将值填入array中
   * sort()    排序
-  * binarySearch()    在排好序的array中虚招元素
+  * binarySearch()    在排好序的array中寻找元素
   * System.arraycopy()    复制array
 
 ## Collection接口
@@ -31,7 +31,7 @@ contains(obj) | 判断集合中是否有obj的引用 | boolean
 Iterator() | 返回一个iterator对象 | Iterator
 remove(obj) | 从集合中删除引用 | boolean
 size() | 返回集合中元素的数目 | int
-toArray() | 返回一个数组 
+toArray() | 返回一个数组
 
 ## set
 

@@ -5,7 +5,7 @@
 * 创建cookie
 
     ```java
-    //创建servlet 
+    //创建servlet
     Cookie cookie = new Cookie("name", "value");
     Response.addCookie(cookie);
     ```
@@ -21,7 +21,7 @@
 * cookie保存时的编码问题
 
     cookie的值只能是 ascii字符，中文要转换  方法如下
-    
+
     ```java
         URLEncoder.encode()
         URLDecoder.decode()
@@ -35,6 +35,7 @@
         //seconds = 0 立即删除
         //seconds < 0 保存在内存，关闭浏览器删除
     ```
+
 * 删除cookie
 
     ```java
@@ -43,17 +44,18 @@
         c.setMaxAge(0);
         response.addCookie(c);
     ```
+
 * cookie路径
 
-    浏览器想服务器请求时，会比较cookie路径与访问路径是否匹配，发送匹配的cookie
+    浏览器向服务器请求时，会比较cookie路径与访问路径是否匹配，发送匹配的cookie
     可以通过 cookie.setPath(String path) 来配置
 
 * cookie限制
 
-    * 大小在4K左右
-    * 浏览器约能保存 300个左右
-    * cookie只能是字符串，且有编码问题
-    * cookie 可以被禁止、不安全
+  * 大小在4K左右
+  * 浏览器约能保存 300个左右
+  * cookie只能是字符串，且有编码问题
+  * cookie 可以被禁止、不安全
 
 ## session
 
@@ -92,18 +94,20 @@
 -|-
 String session.getId() | 获取sessionId
 session.setAttribute(String name,Object obj) | 绑定数据
-Object session.getAttribute(String name) | 获取session对象，不存在返回null
+Object session.getAttribute(String name) | 获取session对象绑定的数据，不存在返回null
 
 * session超时
 
-    * java设置  默认时间单位是 秒
+  * java设置  默认时间单位是 秒
+
     ```java
     session.setMaxInactiveInterval(int seconds);
                 //不活跃 间隔
     ```
 
-    * web.xml设置   默认时间单位是 分钟
-    ```xml 
+  * web.xml设置   默认时间单位是 分钟
+
+    ```xml
         <session-config>
             <session-timeout>30<session-timeout> 
         </session-config>
@@ -116,25 +120,26 @@ session.invalidate();
 //在 登出操作的时候  就要删除session
 ```
 
-#### session验证
+### session验证
 
 登录成功后给 添加一个session   如果  user user
 
 在访问页面的时候  在页面里  判断  getAttribute(user)   如果是null  则说明没有登录，重定向页面
-
 
 ## 用户禁止cookie 后如何使用session
 
     因为进制使用cookie 所以 在服务器返回sessionId的时候本地无法存储，那么在发送请求的时候无法判断是否是与 服务器对应的 所以在请求的时候
 
 1. URL重写
-    
+
     * 方法一、在jsp中重重写url
+
     ```jsp
     <a href="<%=reponse.encodeURL('action')%>">
     ```
 
     * 方法二、在重定向
+
     ```java
     /**
     *@class SomeServlet serclet
@@ -142,7 +147,7 @@ session.invalidate();
     session.setAttribute("name","weibin);
     response.encodeRedirectURL(response.sendRedirectURL("other"));
     ```
-    
+
     ```java
     /**
     *@class OtherServlet redirect to here
@@ -154,6 +159,3 @@ session.invalidate();
     out.println(name);
     out.close();
     ```
-
-
-

@@ -116,13 +116,14 @@ public class MySQLDemo {
     System.out.println("数据插入成功");
     }
 ```
+
 #### 关联查询(sql)
 
 ```sql
-SELECT * 
+SELECT *
 from z_emp emp  -- 可以空格后加  声明 变量名
 JOIN z_eba eba
-	on emp.name = eba.name      --可以判断的条件应该还有  再用到的时候再补充
+on emp.name = eba.name      --可以判断的条件应该还有  再用到的时候再补充
 ```
 
 ### 关闭
@@ -132,7 +133,6 @@ rs.close()
 stmt.close()
 conn.close() //如果
 ```
-
 
 ### JDBC中的事务
 
@@ -153,7 +153,6 @@ conn.close() //如果
 关联表 | 关联查询
 
 主表从表是相对的
-
 
 ## sql 语句创建表
 

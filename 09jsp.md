@@ -65,7 +65,7 @@
     ```
 
 1. 访问bean的属性
-    
+
     * ${oUser.name}  或  ${oUser["name"]}
 
         jsp引擎会从 pageContext -> request -> session -> application
@@ -82,6 +82,7 @@
         ```jsp
             ${requestScope.oUser.name}
         ```
+
 2. 获得请求参数
 
     * ${param.username}

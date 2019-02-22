@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository>E:/maven-3.5.2/repository</localRepository>
+  <servers>
+    <server>
+      <id>central</id>
+      <username>admin</username>
+      <password>ebsdh</password>
+    </server>
+    <server>
+      <id>releases</id>
+      <username>admin</username>
+      <password>ebsdh</password>
+    </server>
+    <server>
+      <id>snapshots</id>
+      <username>admin</username>
+      <password>ebsdh</password>
+    </server>
+    <server>
+      <id>thirdparty</id>
+      <username>admin</username>
+      <password>ebsdh</password>
+    </server>
+  </servers>
+  <mirrors>
+
+    <mirror>
+      <id>central</id>
+      <mirrorOf>*</mirrorOf>
+      <name>local private nexus</name>
+      <url>http://src.ivo.com.cn/nexus/content/groups/public</url>
+    </mirror>
+
+    <mirror>
+      <id>nexus-aliyun</id>
+      <mirrorOf>*</mirrorOf>
+      <name>Nexus aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </mirror>
+
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>jdk-1.7</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <jdk>1.7</jdk>
+      </activation>
+      <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
+      </properties>
+    </profile>
+    <profile>
+      <id>nexus</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://src.ivo.com.cn/nexus/content/groups/public</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://src.ivo.com.cn/nexus/content/groups/public</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>JDK1.7</activeProfile>
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+</settings>
