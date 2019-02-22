@@ -27,7 +27,7 @@
     * out
     * request
     * response
-    
+
 ## jsp文件转换成.java文件
 
 * html转换为jsp
@@ -36,10 +36,6 @@
     放到service()方法里
 
 ## 写一个jsp文件
-
-
-
-
 
 第五章
 
@@ -51,7 +47,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 ```
 
-
 * jstl  
 
     java standard taglib  （java 标准 标签库）
@@ -59,7 +54,7 @@
 #### el 表达式的基本语法
 
 新建**bean**实体类、get&set,之后实例化对象 user,将user绑定到 request对象上面
-    
+
     ```java
     request.setAttribute("oUser",user);
     ```
@@ -98,80 +93,82 @@
 
 1. <c:if test="" var="" scope=""></c:if>
 
-```jsp
-<c:if test="flag">
-    <!-- if flag equal true do something -->
-</c:if>
-```
+    ```jsp
+    <c:if test="flag">
+        <!-- if flag equal true do something -->
+    </c:if>
+    ```
 
     如果test为true 则 执行
 
-属性 | 用法
--|-
-test | val为 boolean true则执行标签体内容false则不执行
-var  | 指定一个绑定名
-scope| 指定绑定范围 (pageContext，request，session，application)
+    属性 | 用法
+    -|-
+    test | val为 boolean true则执行标签体内容false则不执行
+    var  | 指定一个绑定名
+    scope| 指定绑定范围 (pageContext，request，session，application)
 
 2. <c:choose>   <c:when test="">    <c:otherwise>
 
     很像if else
-```jsp
-<c:choose>
-    <c:when test="${user.gendar == 'm'}">男</c:when>
-    <c:otherwise>女</c:otherwise>
-</c:choose>
-```
+
+    ```jsp
+    <c:choose>
+        <c:when test="${user.gendar == 'm'}">男</c:when>
+        <c:otherwise>女</c:otherwise>
+    </c:choose>
+    ```
 
 3. <c:forEach var="" items"" varStatus="">
 
     很像 foreach
 
-```jsp
-<c:forEach var="user" items="${users}">
-    <tr>
-        <td>${user.name}</td>
-        <td>${user.gendar}</td>
-    </tr>
-</c:forEach>
-```
+    ```jsp
+    <c:forEach var="user" items="${users}">
+        <tr>
+            <td>${user.name}</td>
+            <td>${user.gendar}</td>
+        </tr>
+    </c:forEach>
+    ```
 
 4. <c:rul>
 
-当用户进制cookie后再地址后添加sessionId
+    当用户进制cookie后再地址后添加sessionId
 
-```jsp
-<a href="<c:url value='/jst.jsp/'>">访问jst.jsp</a>
-```
+    ```jsp
+    <a href="<c:url value='/jst.jsp/'>">访问jst.jsp</a>
+    ```
 
 5. <c:set var="" scope="" value="">
 
     绑定一个对象到指定的范围
-```jsp
-<c:set var="rs" scope="session" value="2">
-<p>
-    ${sessionScopt.rs} 
-    <!-- 2 -->
-</p>
-<c:remove var="rs" scope="session">
-<p>
-    ${sessionScopt.rs} 
-    <!--  -->
-</p>
-```
+
+    ```jsp
+    <c:set var="rs" scope="session" value="2">
+    <p>
+        ${sessionScopt.rs}
+        <!-- 2 -->
+    </p>
+    <c:remove var="rs" scope="session">
+    <p>
+        ${sessionScopt.rs}
+        <!--  -->
+    </p>
+    ```
 
 6. <c:catch var="">
 
-```jsp
-<c:catch var="msg">
-    <%
-        Integer.parseInt("123a");
-    %>
-</c:catch>
-${msg}  
-<!-- 输出报错 -->
-```
+    ```jsp
+    <c:catch var="msg">
+        <%
+            Integer.parseInt("123a");
+        %>
+    </c:catch>
+    ${msg}  
+    <!-- 输出报错 -->
+    ```
 
-7. <c:import url> 
+7. <c:import url>
 
     引入文件
 8. <c:redirect url="">
@@ -181,7 +178,6 @@ ${msg}
 9. <c:out value="" default="" escapeXml="">
 
 escapeXml="" 默认值为true 将value 中的特殊字符用实体字符替换
-
 
 ```jsp
     <c:out value="${str}" default="hello">

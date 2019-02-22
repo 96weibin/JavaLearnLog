@@ -109,7 +109,7 @@ Object session.getAttribute(String name) | 获取session对象绑定的数据，
 
     ```xml
         <session-config>
-            <session-timeout>30<session-timeout> 
+            <session-timeout>30<session-timeout>
         </session-config>
     ```
 

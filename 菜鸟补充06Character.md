@@ -1,8 +1,9 @@
 # character类
 
-character类对于单个字符进行操作 
+character类对于单个字符进行操作
 
 创建character 对象
+
 ```java
 //new
 Character ch = new Character('a');
@@ -17,8 +18,7 @@ char c = test('x');
 
 ```
 
-
-### Character方法
+## Character方法
 
 方法 | 描述
 isLeeter() | 是否是一个字母
@@ -29,7 +29,3 @@ isLowerCase() | 是否是小写字母
 toUpperCase() | 转化成大写形式
 toLowerCase() | 转化成小写形式
 toString() | 转化成字符串
-
-
-
-

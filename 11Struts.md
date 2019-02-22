@@ -52,6 +52,7 @@ action里面自动获取 input标签  name对应传来的数据
                 xwork-core-2.3.33.jar
             web.xml
 ```
+
 ### 代码实现
 
 * WelcomeAction.java
@@ -94,7 +95,7 @@ public class WelcomeAction {
     <!-- 一个package可以包含多个 action -->
     <action name="welcome" class="com.tarena.outman.WelcomeAction">
     <!-- 请求的名字 welcome、 action类地址  -->
-      <!-- action类返回那个 name则 转发到那个jsp -->		
+      <!-- action类返回那个 name则 转发到那个jsp -->
       <result name="success">/WEB-INF/jsp/welcome.jsp</result>
       <result name="fail">WEB-INF/jsp/nameform.jsp</result>
     </action>
@@ -120,6 +121,7 @@ public class WelcomeAction {
 </html>
 
 ```
+
 * welcome.jsp
 
 ```jsp
@@ -140,10 +142,10 @@ public class WelcomeAction {
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app version="2.4" 
-xmlns="http://java.sun.com/xml/ns/j2ee" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+<web-app version="2.4"
+xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
   <filter>
     <filter-name>Struts2</filter-name>
@@ -157,8 +159,8 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
   </filter-mapping>
 </web-app>
 ```
-//TODO 待补充   filter
 
+//TODO 待补充   filter
 
 ## Struts2  链接数据库
 
@@ -169,7 +171,7 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 在action 中获执行 dao中的方法获取到来自数据库的数据，在action内声明get set，
 这样在 jsp页面就可以用el表达式来取出来
 
-### 目录结构
+### 目录结构2
 
 ```html
 project\
@@ -191,7 +193,7 @@ project\
       web.xml
 ```
 
-### 代码实现
+### 代码实现2
 
 #### database.properties
   
@@ -211,66 +213,66 @@ url=jdbc\:mysql\://10.20.2.9\:3306/test
 ```java
 
 public class ConnectionUtils {
-	//貌似是  Spring  连接池   database.properties
-	private static String url;
-	private static String driver;
-	private static String username;
-	private static String password;
-	
-	static {
-		Properties props = new Properties();
-		try{
-			props.load(ConnectionUtils.class.getClassLoader().getResourceAsStream("database.properties"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if(props != null){
-			url = props.getProperty("url");
-			driver = props.getProperty("driver");
-			username = props.getProperty("username");
-			password = props.getProperty("password");
-			
-			try{
-				Class.forName(driver);
-			} catch (ClassNotFoundException e){
-				e.printStackTrace();
-			}
-		}
-	}
-	public static Connection openConnection() throws SQLException{
-		return DriverManager.getConnection(url,username,password);
-	}
-	public static void closeConnection(Connection con){
-		try{
-			if(con != null){
-				con.close();
-			}
-		} catch (SQLException e){
-			e.printStackTrace();
-		}
-	}
-	public static void closeStatement(Statement stmt) {
-		try {
-		if (stmt != null) {
-		stmt.close();
-		}
-		} catch (SQLException e) {
-		e.printStackTrace();
-		}
-		}
-	public static void closeResultSet(ResultSet rs) {
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	public static void main(String[] args) throws Exception {
-		Connection con = openConnection();
-		System.out.println(con);
-	}
+  //貌似是  Spring  连接池   database.properties
+  private static String url;
+  private static String driver;
+  private static String username;
+  private static String password;
+  
+  static {
+    Properties props = new Properties();
+    try{
+      props.load(ConnectionUtils.class.getClassLoader().getResourceAsStream("database.properties"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    if(props != null){
+      url = props.getProperty("url");
+      driver = props.getProperty("driver");
+      username = props.getProperty("username");
+      password = props.getProperty("password");
+
+      try{
+        Class.forName(driver);
+      } catch (ClassNotFoundException e){
+        e.printStackTrace();
+      }
+    }
+  }
+  public static Connection openConnection() throws SQLException{
+    return DriverManager.getConnection(url,username,password);
+  }
+  public static void closeConnection(Connection con){
+    try{
+      if(con != null){
+        con.close();
+      }
+    } catch (SQLException e){
+      e.printStackTrace();
+    }
+  }
+  public static void closeStatement(Statement stmt) {
+    try {
+    if (stmt != null) {
+    stmt.close();
+    }
+    } catch (SQLException e) {
+    e.printStackTrace();
+    }
+    }
+  public static void closeResultSet(ResultSet rs) {
+    try {
+      if (rs != null) {
+        rs.close();
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+  public static void main(String[] args) throws Exception {
+    Connection con = openConnection();
+    System.out.println(con);
+  }
 }
 
 ```
@@ -278,36 +280,37 @@ public class ConnectionUtils {
 #### project.java
 
   会用到的数据读写类
+
 ```java
 public class Project {
-	private int id;
-	private String name;
-	private Date startDate;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Date getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	private Date endDate;
+  private int id;
+  private String name;
+  private Date startDate;
+  public int getId() {
+    return id;
+  }
+  public void setId(int id) {
+    this.id = id;
+  }
+  public String getName() {
+    return name;
+  }
+  public void setName(String name) {
+    this.name = name;
+  }
+  public Date getStartDate() {
+    return startDate;
+  }
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+  public Date getEndDate() {
+    return endDate;
+  }
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+  private Date endDate;
 }
 
 ```
@@ -315,70 +318,71 @@ public class Project {
 #### ProjectDao
 
   封装 操作数据库的某种方法  
+
 ```java
 public class ProjectDao {
-	private static final String findAll = "select id,name,start_date,end_date from t_project";
+  private static final String findAll = "select id,name,start_date,end_date from t_project";
   //查询
-	private static final String findPage = "select id,name,start_date,end_date from t_project limit ?,?";
+  private static final String findPage = "select id,name,start_date,end_date from t_project limit ?,?";
   //查询分页
 
-	public List<Project> findAll(){
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		
-		try{
-			con = ConnectionUtils.openConnection(); //util中的方法
-			stmt = con.prepareStatement(findAll);
-			rs = stmt.executeQuery();
-			List <Project> list = new ArrayList<Project>();
-			while(rs.next()){
-				Project project = new Project();
-				project.setId(rs.getInt(1));
-				project.setName(rs.getString(2));
-				project.setStartDate(rs.getDate(3));
-				project.setEndDate(rs.getDate(4));
-				list.add(project);
-			} 
-			return list;
-		}catch (Exception e){
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public List<Project> findAll(int page,int rowsPerPage){
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		try{
-			con = ConnectionUtils.openConnection();
-			stmt = con.prepareStatement(findPage);
-			stmt.setInt(1, (page - 1) * rowsPerPage);
-			stmt.setInt(2, rowsPerPage);
-			rs = stmt.executeQuery();
-			List<Project> list = new ArrayList<Project>();
-			while(rs.next()){
-				Project project = new Project();
-				project.setId(rs.getInt(1));
-				project.setName(rs.getString(2));
-				project.setStartDate(rs.getDate(3));
-				project.setEndDate(rs.getDate(4));
-				list.add(project);
-			}
-			return list;
-		}catch(Exception e){
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-	public static void main (String[] args){
-		ProjectDao dao = new ProjectDao();
-		List <Project> list = dao.findAll(1,5);
-		for(Project p :list){
-			System.out.println(p.getName());
-		}
-	}
+  public List<Project> findAll(){
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+
+    try{
+      con = ConnectionUtils.openConnection(); //util中的方法
+      stmt = con.prepareStatement(findAll);
+      rs = stmt.executeQuery();
+      List <Project> list = new ArrayList<Project>();
+      while(rs.next()){
+        Project project = new Project();
+        project.setId(rs.getInt(1));
+        project.setName(rs.getString(2));
+        project.setStartDate(rs.getDate(3));
+        project.setEndDate(rs.getDate(4));
+        list.add(project);
+      }
+      return list;
+    }catch (Exception e){
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
+  }
+  
+  public List<Project> findAll(int page,int rowsPerPage){
+    Connection con = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    try{
+      con = ConnectionUtils.openConnection();
+      stmt = con.prepareStatement(findPage);
+      stmt.setInt(1, (page - 1) * rowsPerPage);
+      stmt.setInt(2, rowsPerPage);
+      rs = stmt.executeQuery();
+      List<Project> list = new ArrayList<Project>();
+      while(rs.next()){
+        Project project = new Project();
+        project.setId(rs.getInt(1));
+        project.setName(rs.getString(2));
+        project.setStartDate(rs.getDate(3));
+        project.setEndDate(rs.getDate(4));
+        list.add(project);
+      }
+      return list;
+    }catch(Exception e){
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
+  }
+  public static void main (String[] args){
+    ProjectDao dao = new ProjectDao();
+    List <Project> list = dao.findAll(1,5);
+    for(Project p :list){
+      System.out.println(p.getName());
+    }
+  }
 }
 ```
 
@@ -392,30 +396,30 @@ public class ProjectDao {
 
 ```java
   public class ProjectListAction {
-	private List<Project> projectList;
-	private int page = 1;
-	public int getPage() {
-		return page;
-	}
-	public void setPage(int page) {
-		this.page = page;
-	}
-	public List<Project> getProjectList() {
-		return projectList;
-	}
-	public void setProjectList(List<Project> projectList) {
-		this.projectList = projectList;
-	}
-	
-	public String execute(){
-		ProjectDao projectDao = new ProjectDao();
-		System.out.print(page);
-		projectList = projectDao.findAll(page,5);
-		return "success";
-	}
+  private List<Project> projectList;
+  private int page = 1;
+  public int getPage() {
+    return page;
+  }
+  public void setPage(int page) {
+    this.page = page;
+  }
+  public List<Project> getProjectList() {
+    return projectList;
+  }
+  public void setProjectList(List<Project> projectList) {
+    this.projectList = projectList;
+  }
+  
+  public String execute(){
+    ProjectDao projectDao = new ProjectDao();
+    System.out.print(page);
+    projectList = projectDao.findAll(page,5);
+    return "success";
+  }
 }
 ```
-  
+
 #### projectlist.jsp
 
 ```jsp
@@ -423,35 +427,35 @@ public class ProjectDao {
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- 引入这个才能el表达式的标签的功能才能生效 -->
 <html>
-	<head>
-		<title></title>
-	</head>
-	<body>
-		<h1>
-			Project List
-		</h1>
-		<h2>
-			<a href="projectlist.action?page=${page-1}">上一页</a>
-			<span>|第${page}页|</span>
-			<a href="projectlist.action?page=${page+1}">下一页</a>
-		</h2>
-		<table width="90%" border="2">
-			<tr>
-				<td>ID</td>
-				<td>Name</td>
-				<td>Start Date</td>
-				<td>End Date</td>
-			</tr>
-			<c:forEach var="p" items="${projectList}">
-				<tr>	
-					<td>${p.id}</td>
-					<td>${p.name}</td>
-					<td>${p.startDate}</td>
-					<td>${p.endDate}</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</body>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <h1>
+      Project List
+    </h1>
+    <h2>
+      <a href="projectlist.action?page=${page-1}">上一页</a>
+      <span>|第${page}页|</span>
+      <a href="projectlist.action?page=${page+1}">下一页</a>
+    </h2>
+    <table width="90%" border="2">
+      <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Start Date</td>
+        <td>End Date</td>
+      </tr>
+      <c:forEach var="p" items="${projectList}">
+        <tr>
+          <td>${p.id}</td>
+          <td>${p.name}</td>
+          <td>${p.startDate}</td>
+          <td>${p.endDate}</td>
+        </tr>
+      </c:forEach>
+    </table>
+  </body>
 </html>
 ```
 
@@ -463,27 +467,21 @@ public class ProjectDao {
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<filter>
-		<filter-name>Struts2</filter-name>
-		<filter-class>
-			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
-		</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>Struts2</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+  <filter>
+    <filter-name>Struts2</filter-name>
+    <filter-class>
+      org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+    </filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Struts2</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
 ```
 
 ## OGNL表达式
 
-
 TODO 待补充
-
-
-
-
-

@@ -16,7 +16,7 @@ System.out.print(sBuffer); //世界真美好true
 
 方法 | 描述 | demo
 -|-|-
-sb.append(str) | 追加 
+sb.append(str) | 追加
 sb.reverse() | 翻转
 sb.delete(start,end) | 删除sb片段
 sb.insert(offset,kit) | 在sb偏移offset 后插入 kit

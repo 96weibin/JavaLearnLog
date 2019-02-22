@@ -505,4 +505,3 @@ query.setParameter("employee_id",1234);
 int result = query.executeUpdate();
 System.out.println("delete操作影响了" + result + "行");
 ```
-

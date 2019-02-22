@@ -92,13 +92,11 @@ response.setContentType()设置返回值得类型
 * dao实现类
 * dao工厂
 
-
 ## servlet demo  员工信息增删改查
 
 ### 目录结构
 
-![](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-25/97952630.jpg)
-
+![目录结构](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-25/97952630.jpg)
 
 ### entity包 下的 Employee （实体类）
 
@@ -159,13 +157,13 @@ package dao;
 
 import java.util.List;
 import entity.Employee;
-     
+
 public interface EmployeeDAO {
   //dao的接口
   public List <Employee> findAll() throws Exception;
-    
+
   public void delete(long id) throws Exception;
-    
+
   public void save(Employee e) throws Exception;
   
   public Employee findById(long id) throws Exception;
@@ -246,7 +244,7 @@ public class EmployeeDAOJdbcImpl implements EmployeeDAO{
       e.setName(res.getString("name"));
       e.setSalary(res.getDouble("salary"));
       e.setAge(res.getInt("age"));
-      
+  
     }
     DBUtil.close(conn);
     return e;
@@ -256,7 +254,7 @@ public class EmployeeDAOJdbcImpl implements EmployeeDAO{
   public void update(Employee e) throws Exception {
     Connection conn = DBUtil.getConnection();
     PreparedStatement prep = conn.prepareStatement("update z_emp" + " set name = ?, salary = ?, age = ? " + "where id = ?");
-    
+
     prep.setString(1, e.getName());
     prep.setDouble(2, e.getSalary());
     prep.setInt(3, e.getAge());
@@ -267,7 +265,6 @@ public class EmployeeDAOJdbcImpl implements EmployeeDAO{
 }
 
 ```
-
 
 ### util包下 的 DBUtil (链接数据库关闭数据库的公共方法)
 
@@ -303,14 +300,13 @@ public class DBUtil {
   }
   
   //测试用的
-//	public static void main(String[] arguments) throws Exception{
-//		System.out.println(getConnection());
-//	}
+//public static void main(String[] arguments) throws Exception{
+//System.out.println(getConnection());
+//}
   
 }
 
 ```
-
 
 ### web包下的 ListEmpServlet （员工信息列表显示servlet）
 
@@ -336,7 +332,7 @@ public class ListEmpServlet extends HttpServlet {
 
   
   /**
-   * 
+   *
    */
   private static final long serialVersionUID = 1L;
 
@@ -370,7 +366,7 @@ public class ListEmpServlet extends HttpServlet {
                 + "</td>"
               + "</tr>"
             );
-        
+
       }
       out.println("</table>");
       out.println("<a href='addEmp.html'>" + "增加新雇员</a>");
@@ -385,8 +381,7 @@ public class ListEmpServlet extends HttpServlet {
 
 ```
 
-
-### web包下的 addEmpServlet 
+### web包下的 addEmpServlet
 
     接收addemp.html 表单提交的数据 调用 set 一个 实体类  调用  dao的 save方法 将实体类的数据传入数据库 从而添加了  一个员工的信息
 
@@ -406,7 +401,7 @@ import entity.Employee;
 public class AddEmpServlet extends HttpServlet {
   
   /**
-   * 
+   *
    */
   private static final long serialVersionUID = 1L;
 
@@ -472,7 +467,7 @@ public class DelEmpServelet extends HttpServlet {
 }
 ```
 
-### web 包下的 LoadEmpServlet 
+### web 包下的 LoadEmpServlet
 
     根据传来的id 调用  dao的 findOne  显示 用表单显示 某一个员工的数据 ,如果 表单提交则提交 可能是改过的 员工信息到 ModifyEmpServlet
 
@@ -497,7 +492,7 @@ public class LoadEmpServlet extends HttpServlet {
 
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    
+
     long id = Long.parseLong(request.getParameter("id"));
     try{
       EmployeeDAO dao = new EmployeeDAOJdbcImpl();
@@ -512,7 +507,7 @@ public class LoadEmpServlet extends HttpServlet {
       out.println("<input type='submit' value='确认'>");
       out.println("</from>");
       out.close();
-      
+
     }catch(Exception e){
       e.printStackTrace();
       throw new ServletException(e);
@@ -561,15 +556,12 @@ public class ModifyEmpServlet extends HttpServlet {
     }catch(Exception e){
       e.printStackTrace();
       throw new ServletException(e);
-    }	
+    }
   }
 }
 ```
 
 ### dao的流程理解图
-
-
-
 
 ## dao工厂模式
 
@@ -595,7 +587,6 @@ public class DAOFactory {
 //不需要 挨个servlet 来更改。
 EmployeeDAO dao = (EmployeeDAO) DAOFactory.getInstance("EmployeeDAO");
 ```
-
 
 ### 改进的工厂模式（没看懂）
 
@@ -627,7 +618,7 @@ public class ConfigUtil {
     }catch(IOException e){
       e.printStackTrace();
     }
-        
+
   }
   public static String getValue(String key){
     return props.getProperty(key);
@@ -654,19 +645,15 @@ public class DAOFactory {
     } catch (Exception e){
       e.printStackTrace();
     }
-    
-//		if(type.equals("EmployeeDAO")){
-//			obj = new EmployeeDAOHibernateImpl();
-//		}
+//  if(type.equals("EmployeeDAO")){
+//  obj = new EmployeeDAOHibernateImpl();
+//}
     return obj;
   }
 }
 ```
 
-
-
 ## 类加载器
-
 
 ```java
 Student s = new Student();
@@ -681,43 +668,42 @@ Student s2 = new Student();
 
 1. 程序执行 到第一行 Student
 
-  此时jvm 查看  方法区  中是否有 Student对应的类,没有  调用 类加载器
-  类加载器 通过 classPath 找到 Student物理位置的字节码文件
-  类加载器 将 class文件变成 对象放入方法区。
+    此时jvm 查看  方法区  中是否有 Student对应的类,没有  调用 类加载器
+    类加载器 通过 classPath 找到 Student物理位置的字节码文件
+    类加载器 将 class文件变成 对象放入方法区。
 
 2. 执行到 第一行 s
 
-  将 s 放入栈空间
+    将 s 放入栈空间
 
 3. 执行 第一行 new Student();
 
-  在堆空间创建对象 ， s 指向这个对象。   对象存储着  对象的属性
-  对象的方法放在  方法区 
+    在堆空间创建对象 ， s 指向这个对象。   对象存储着  对象的属性
+    对象的方法放在  方法区
 
 4. 执行 s.play();
 
-  到方法区找到play方法执行
+    到方法区找到play方法执行
 
-  ![](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-28/90000630.jpg)
+    ![堆栈](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-28/90000630.jpg)
 
+5. 执行第三行 Student
 
-5. 执行第三行 Student 
+    已经存在 Student类。所以不调用类加载器。
 
-  已经存在 Student类。所以不调用类加载器。
+6. 第三行  s2
 
-6. 第三行  s2 
+    将s2存入到栈区
 
-  将s2存入到栈区
+7. new Student();
 
-6. new Student();
+    在堆空间创建对象、对象存储着属性，方法任然是  方法区的 同一个方法。
 
-  在堆空间创建对象、对象存储着属性，方法任然是  方法区的 同一个方法。
-
-  ![](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-28/8900073.jpg)
+    ![堆栈](http://96weibin-blog.oss-cn-beijing.aliyuncs.com/18-12-28/8900073.jpg)
 
 ## 处理请求资源路径
 
-  http://ip:port/appName/abc.html;
+  [http://ip:port/appName/abc.html](http://ip:port/appName/abc.html);
 
   webObject 对应的就是   appName 下面的 abc.html由  web.xml配置。
 
@@ -726,30 +712,29 @@ Student s2 = new Student();
 rul-pattern | 匹配请求
 -|-
 /abc | 匹配精确的abc
-/abc.html | 可以骗人，其实我请求的是一个servlet，<br>访问的url却是abc.html
+/abc.html | 可以骗人，其实我请求的是一个servlet,访问的url却是abc.html
 /abc/* | 匹配 /abc/任何字符串(可以有空格)
 *.do | 匹配任何以 .do 为后缀的
 
 ## Servlet处理多种请求
 
-
 ### 一个servlet接收多个请求
 
   通过拆分请求url 执行不同的逻辑
+
 ```java
-String uri = request.getRequestURI();
-String path = uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
-if(path.equals("list")){
-  //dosomething
-}else if(path.equals("add")){
-  //dosomething
-}
+  String uri = request.getRequestURI();
+  String path = uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
+  if(path.equals("list")){
+    //dosomething
+  }else if(path.equals("add")){
+    //dosomething
+  }
 ```
 
   请求不同的url 要设置  web.xml中   urlPattern  为 *.do
 
 * 以我一个前端开发的经验，我写过的多个务求请求一个页面都是传不同的状态值，后台判断状态值，执行不同的逻辑
-
 
 ## servlet生命周期与核心接口与类
 
@@ -757,17 +742,17 @@ if(path.equals("list")){
 
 1. Servlet 接口
 
-  init(ServletConfig config)
-  destory()
-  service(ServletRequest res,ServletResponse rep)
+    init(ServletConfig config)
+    destory()
+    service(ServletRequest res,ServletResponse rep)
 
 2. GenericServlet抽象类
 
-  实现了 Servlet接口中的  inti 和 destroy方法
+    实现了 Servlet接口中的  inti 和 destroy方法
 
-3.  HttpServlet抽象类
+3. HttpServlet抽象类
 
-  继承了GennericServlet实现了 service方法
+    继承了GennericServlet实现了 service方法
 
 4. ServletRequest 与 ServletResponse接口
 
@@ -777,27 +762,8 @@ if(path.equals("list")){
 
     String getInitParameter(String paraName);
 
-
 ### servlet生命周期
-
 
   servlet 04   待补充
 
-
 ## 过滤器
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
