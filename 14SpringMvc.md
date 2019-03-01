@@ -39,6 +39,14 @@
   </web-app>
   ```
 
+##### classpath
+
+1. classpath与classpath* 的区别
+
+classpath | classpath*
+-|-
+classes目录中查找 | classes及其子目录
+
 ##### 补充
 
 * web.xml中的一些其他标签
