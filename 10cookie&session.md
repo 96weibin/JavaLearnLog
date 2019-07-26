@@ -144,7 +144,7 @@ session.invalidate();
     /**
     *@class SomeServlet serclet
     */
-    session.setAttribute("name","weibin);
+    session.setAttribute("name","weibin");
     response.encodeRedirectURL(response.sendRedirectURL("other"));
     ```
 

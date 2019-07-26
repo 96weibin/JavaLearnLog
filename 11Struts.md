@@ -90,8 +90,8 @@ public class WelcomeAction {
   <package name="helloworld" extends="struts-default" namespace="/day01">
   <!-- 包名 helloworld、  继承struts-default、 action地址的命名空间 -->
     <action name="nameform.jsp">
-            <result name="success">/WEB-INF/jsp/welcome.js</result>
-        </action>
+        <result name="success">/WEB-INF/jsp/welcome.js</result>
+    </action>
     <!-- 一个package可以包含多个 action -->
     <action name="welcome" class="com.tarena.outman.WelcomeAction">
     <!-- 请求的名字 welcome、 action类地址  -->

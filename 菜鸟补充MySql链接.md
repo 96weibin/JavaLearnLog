@@ -126,6 +126,12 @@ JOIN z_eba eba
 on emp.name = eba.name      --可以判断的条件应该还有  再用到的时候再补充
 ```
 
+##### sql的left join 、right join 、inner join之间的区别
+
+* left join(左联接) 返回包括左表中的所有记录和右表中联结字段相等的记录
+* right join(右联接) 返回包括右表中的所有记录和左表中联结字段相等的记录
+* inner join(等值连接) 只返回两个表中联结字段相等的行
+
 ### 关闭
 
 ```java

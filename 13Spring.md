@@ -245,9 +245,7 @@ Spring容器通过依赖注入DI   建立起对象、组件、bean之间的关�
 
 ```xml
 <bean id="b" class="com.demo4.B"></bean>
-
 <bean id="a" class="com.demo4.A">
-
   <!-- 注入 bean -->
   <property name="b" ref="b"></property>
   <!-- 注入字符串 value可以写在 行内，也可以写在标签内 value 标签-->

@@ -479,7 +479,7 @@ List results = query.list();
 
 ```java
 String hql = "UPDATE Employee set Salary = :salary" + "WHERE id = :employee_id";
-Query.query = session.createQuery(hql);
+Query query = session.createQuery(hql);
 query.setParameter = ("salary","999999");
 query.setParameter = ("employee_id",1811109);
 int result = query.executeUpdate();

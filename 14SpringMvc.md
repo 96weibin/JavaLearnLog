@@ -179,15 +179,16 @@ public class LoginControl implements Controller {
   @Controller //声明 controller
   @RequestMapping(value = "/demo")   //请求路径
   public class EmployeeControl {
-  @Autowired      //DI注入
-  public EmployeeService eservice;
-  @Autowired
-  public DepartmentService dservice;
-  //登录
-  @RequestMapping("/login") //子路径
-  public String dologin(HttpServletRequest req) {   //servlet  req,res 返回字符串
-    //do something ...
-    return "url";
+    @Autowired      //DI注入
+    public EmployeeService eservice;
+    @Autowired
+    public DepartmentService dservice;
+    //登录
+    @RequestMapping("/login") //子路径
+    public String dologin(HttpServletRequest req) {   //servlet  req,res 返回字符串
+      //do something ...
+      return "url";
+    }
   }
   ```
 
